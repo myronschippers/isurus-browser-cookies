@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './App.css';
 
 class App extends Component {
     state = {
@@ -30,11 +31,13 @@ class App extends Component {
 
         return (
             <div>
-                <h1>Browser Cookies</h1>
-                {myCreature}
+                <div className="headerBar">
+                    <h1>Browser Cookies</h1>
+                    {myCreature}
+                </div>
 
-                <div>
-                    <label>
+                <div className="container">
+                    <label className="formField">
                         <div>Favorite Fantastic Creature:</div>
                         <input
                             type="text"
