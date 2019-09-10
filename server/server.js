@@ -26,14 +26,14 @@ app.use(cookieSession({
 // ------------------------------------------------------------
 
 // save the creature to cookie session
-app.post('/creature', (req, res) => {
+app.post('/api/creature', (req, res) => {
     req.session.fantasticCreature = req.body.fantasticCreature;
 
     res.sendStatus(200);
 });
 
 // retrieve the creature stored with cookie session
-app.get('/creature', (req,res) => {
+app.get('/api/creature', (req,res) => {
     // if there is a call to get creature re-save creature to coockieSession otherwise set session to null 
     req.session.fantasticCreature = req.session && req.session.fantasticCreature || null;
 
@@ -41,7 +41,9 @@ app.get('/creature', (req,res) => {
         fantasticCreature
     } = req.session;
 
-    res.send({fantasticCreature});
+    res.send({
+      fantasticCreature
+    });
 });
 
 /** Listen * */
