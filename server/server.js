@@ -12,7 +12,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// setup cookie session
+// setup cookie-session as express middleware
 
 //
 // API ROUTES
