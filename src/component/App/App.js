@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { setCookie, getCookie } from '../../services/cookies';
+import axios from 'axios';
 
 class App extends Component {
     state = {
@@ -9,11 +10,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        const favoriteCreature = getCookie('favoriteCreature');
-        console.log(favoriteCreature);
-        this.setState({
-            favoriteCreature,
-        });
+        this.getCreature();
     }
     
     changeFavoriteAnimal = (event) => {
@@ -23,11 +20,50 @@ class App extends Component {
     }
 
     saveCreature = (event) => {
-        setCookie('favoriteCreature', this.state.enteredCreature); 
+        axios.post('/creature', {
+            fantasticCreature: this.state.enteredCreature
+        })
+            .then((response) => {
+                this.getCreature();
+            })
+            .catch((err) => {
+                console.log('POST error: ', err);
+                alert('There was an error getting a creature.');
+            });
+
         this.setState({
-            favoriteCreature: this.state.enteredCreature,
             enteredCreature: '',
         });
+    }
+
+    //
+    // API Calls
+    // ------------------------------------------------------------
+
+    getCreature() {
+        axios.get('/get-creature')
+            .then((response) => {
+                this.setState({
+                    favoriteCreature: response.data,
+                });
+            })
+            .catch((err) => {
+                console.log('GET error: ', err);
+                alert('There was an error getting a creature.');
+            });
+    }
+
+    postCreature() {
+        axios.post('/creature', {
+            fantasticCreature: this.state.enteredCreature
+        })
+            .then((response) => {
+                this.getCreature();
+            })
+            .catch((err) => {
+                console.log('POST error: ', err);
+                alert('There was an error getting a creature.');
+            });
     }
 
     render() {
