@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
+import { setCookie, getCookie } from '../../services/cookies';
 
 class App extends Component {
     state = {
         enteredCreature: '',
         favoriteCreature: '',
+    }
+
+    componentDidMount() {
+        const favoriteCreature = getCookie('favoriteCreature');
+        console.log(favoriteCreature);
+        this.setState({
+            favoriteCreature,
+        });
     }
     
     changeFavoriteAnimal = (event) => {
@@ -14,6 +23,7 @@ class App extends Component {
     }
 
     saveCreature = (event) => {
+        setCookie('favoriteCreature', this.state.enteredCreature); 
         this.setState({
             favoriteCreature: this.state.enteredCreature,
             enteredCreature: '',
