@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import cookiesService from '../../services/cookies';
-
-const creatureCookieName = 'favoriteCreature';
 
 class App extends Component {
     state = {
